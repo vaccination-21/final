@@ -1,2 +1,0 @@
-INDEX VERSION 1.4+C:\dev\final_merge\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-3383378911.index

@@ -1,3 +1,0 @@
-INDEX VERSION 1.131
-C:\dev\final_merge\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2169737247.index
-\text_chat_with_voice\src\main\java
