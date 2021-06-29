@@ -19,6 +19,7 @@
 			sendChat: function() {
 				this._sendMessage('${param.bang_id}', 'CMD_MSG_SEND', $('#message').val());
 				$('#message').val('');
+				//alert("hi");
 			},
 			sendEnter: function() {
 				this._sendMessage('${param.bang_id}', 'CMD_ENTER', $('#message').val());
@@ -76,9 +77,9 @@
 		});
 		
 	
-        $(window).on('load', function () {
-			webSocket.init({ url: '<c:url value="/chat" />' });	
-		});	
+	      $(window).on('load', function () {
+				webSocket.init({ url: '<c:url value="/chat" />' });	
+			});		
 		
 		
 		
@@ -172,7 +173,7 @@
 		       }   
 			
 			
-			
+		});
 			///////////////////////////////////////////////////////////////
 			
 			/* 서버에 업로드 */
@@ -200,9 +201,11 @@
 						webSocket.sendChat();
 						$('#message').val('');
 						callAjaxTTS(result);
-						$('audio').prop("c", '/ai/' + 'tts__1624494930089.mp3')[0].play();
+						//$('audio').prop("c", '/ai/' + 'tts__1624494930089.mp3')[0].play();
+						
 						//var audio = new Audio('c/ai/tts__1624494930089.mp3');
 						//audio.play();
+						console.log("play");
 						
 					},
 					error:function(e){
@@ -226,7 +229,7 @@
 													$('#message').val() + '</span></div><br>');		
 				}
 				
-				callAjax();
+				//callAjax();
 				/* 입력란 비우기 */
 				$('#message').val('');
 				
@@ -235,87 +238,21 @@
 			///////////////////////////////////////////////////
 			// 이미지/멀티링크 답변 포함된 답변 처리
 				
-			function callAjax(){
-				$.ajax({
-					type:"post",
-					//dataType:"application/x-www-form-urlencoded; charset=UTF-8",
-					url:"chatbotCall",
-					data:{message:$('#message').val()},
-					success:function(result){	  //JSON  형식 그대로 받음
-						result = JSON.parse(result);
-						//alert(result);
-						//console.log(result);
-						var bubbles = result.bubbles;
-						//alert(bubbles);
-						for(var b in bubbles){
-							//alert(bubbles[b]);
-							console.log([b]);
-							if(bubbles[b].type == 'text'){ //기본 답변인 경우
-								/*chatBox에 받은 메시지 출력 (챗봇의 답변))*/
-								$('#divChatData').append('<div class="msgBox receive"><br>챗봇<br><span>' +
-													bubbles[b].data.description + '</span></div><br><br>');	
-								//챗봇으로 부터 받은 텍스트 답변을 음성으로 변환하기 위해  TTS  호출
-								callAjaxTTS(bubbles[b].data.description);		
-								//alert(bubbles+", "+bubbles[b].data.description);			
-							} else if(bubbles[b].type == 'template'){  //이미지 답변 또는 멀티링크 답변인 경우
-								if(bubbles[b].data.cover.type == 'image'){ //이미지인 경우
-									// 이미지 출력
-									$('#divChatData').append("<img src='" +  bubbles[b].data.cover.data.imageUrl +  "'  alt=' 이미지 없음' >");	
-									
-									// 이미지만 있는 경우 / 이미지 + 텍스트 경우
-									if(bubbles[b].data.contentTable == null){   //이미지만 있는 경우 url  추출
-										$('#divChatData').append("<a href='" + bubbles[b].data.cover.data.url + "' target='_blank'> " +
-										bubbles[b].data.cover.data.url + "</a><br>" );
-										
-									} else{  //이미지+ 텍스트인 경우 텍스트와  url 추출
-										//텍스트만 추출하고 멀티링크와 공통되는 contentTable은 아래에서 다중 for문 사용해서  url 추출
-										$('#divChatData').append("<p>" + bubbles[b].data.cover.data.description + "</p>");	
-										//챗봇으로 부터 받은 텍스트 답변을 음성으로 변환하기 위해  TTS  호출
-										callAjaxTTS(bubbles[b].data.cover.data.description);
-									}
-									
-								} else if(bubbles[b].data.cover.type == 'text'){ //멀터링크인 경우
-									$('#divChatData').append("<p>" + bubbles[b].data.cover.data.description + "</p>");	
-										//챗봇으로 부터 받은 텍스트 답변을 음성으로 변환하기 위해  TTS  호출
-										callAjaxTTS(bubbles[b].data.cover.data.description);
-								}
-								
-								//이미지/멀티링크 답변 공통 (contentTable  포함)
-								for(var ct in bubbles[b].data.contentTable){
-									var ct_data = bubbles[b].data.contentTable[ct];
-									for(var ct_d in ct_data){
-										$('#divChatData').append("<a href='" + ct_data[ct_d].data.data.action.data.url + "' target='_blank'> " +
-										ct_data[ct_d].data.data.action.data.url + "</a><br>" );
-									}
-								}						
-							}
-							
-						} // bubbles for 문 종료
-													
-						/* 스크롤해서 올리기 */
-						$('#divChatData').scrollTop($('#divChatData').prop("scrollHeight"));
-						
-						
-					},
-					error:function(e){
-						alert("에러 발생 call ajax : " + e);
-					}			
-				});
-			}
-			
-			///////////////////////////////////////////////////
 			
 			function callAjaxTTS(result){
 				$.ajax({
 					type:"post",
-					dataType:"application/x-www-form-urlencoded; charset=UTF-8",
+					//dataType:"application/x-www-form-urlencoded; charset=UTF-8",
 					url:"chatbotTTS",
+					//async:false,
+
 					data:{message:result},
 					success:function(result){
-						console.log(result);
 						$('audio').prop("c", '/ai/' + result)[0].play();
+						console.log(result);
 						
-						alert("tts");
+						
+						
 					},
 					error:function(e){
 						alert("에러 발생 call ajax tts: " + e);
@@ -324,7 +261,7 @@
 				
 			}
 			
-		});
+		
 
 		
 
@@ -334,7 +271,8 @@
 <body>
 	<div
 		style="width: 800px; height: 700px; padding: 10px; border: solid 1px #e1e3e9;">
-		<div id="divChatData"></div>
+		<div id="divChatData" style="overflow: scroll; height: 700px;"></div>
+
 	</div>
 	<div style="width: 100%; height: 10%; padding: 10px;">
 		<form id="chatForm" method="post">

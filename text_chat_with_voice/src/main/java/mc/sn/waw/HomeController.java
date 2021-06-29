@@ -47,20 +47,15 @@ public class HomeController {
 		return "home";
 	}
 	@RequestMapping(value = "/echo", produces = "application/text; charset=utf8",method = RequestMethod.GET)
-	public String chatting(Locale locale, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+	public String chatting(Locale locale,Model model) throws Exception {
 		
 		return "chatting";
 	}
 	@RequestMapping(value = "/chat", produces = "application/text; charset=utf8", method = RequestMethod.GET)
-	public ModelAndView view_chat(@ModelAttribute("info") HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+	public String view_chat(Locale locale,Model model) throws Exception {
 		
-		int result = 0;
-		HttpSession session = request.getSession();
-		ModelAndView mav = new ModelAndView("redirect:/chat");
-		
-		
-		
-		return mav;
+	
+		return "view_chat";
 	}
 	
 	
