@@ -125,3 +125,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,eclipse,java
+Servers/
+waw_maeng/
+multi_chatting/
+
