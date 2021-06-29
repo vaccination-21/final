@@ -6,22 +6,30 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import mc.sn.waw.ChatRoomRepository;
 
 /**
  * Handles requests for the application home page.
  */
+
 @Controller
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	private ChatRoomRepository chatRoomRepository;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -38,15 +46,23 @@ public class HomeController {
 		
 		return "home";
 	}
-	@RequestMapping(value = "/echo", method = RequestMethod.GET)
-	public String chatting(Locale locale, Model model) {
+	@RequestMapping(value = "/echo", produces = "application/text; charset=utf8",method = RequestMethod.GET)
+	public String chatting(Locale locale, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		
 		return "chatting";
 	}
-	@RequestMapping(value = "/chat.do", method = RequestMethod.GET)
-	public String view_chat(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+	@RequestMapping(value = "/chat", produces = "application/text; charset=utf8", method = RequestMethod.GET)
+	public ModelAndView view_chat(@ModelAttribute("info") HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		
-		return "view_chat";
+		int result = 0;
+		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView("redirect:/chat");
+		
+		
+		
+		return mav;
 	}
+	
+	
 	
 }

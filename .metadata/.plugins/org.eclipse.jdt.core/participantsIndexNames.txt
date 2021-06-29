@@ -1,3 +1,21 @@
 INDEX VERSION 1.131
+C:\dev\final_merge\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4212136390.index
+\waw\src\main\java
+C:\dev\final_merge\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1220976166.index
+\spring-ai\src\main\java
+C:\dev\final_merge\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2841896740.index
+\waw_maeng\src\main\java
+C:\dev\final_merge\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1633041308.index
+\multi_chatting\src\main\java
+C:\dev\final_merge\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\197857626.index
+\spring-ai\src\main\java
+C:\dev\final_merge\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\900037373.index
+\waw_maeng\src\main\java
+C:\dev\final_merge\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1599551439.index
+\waw_maeng\src\main\java
+C:\dev\final_merge\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2772835465.index
+\text_chat_with_voice\src\main\java
 C:\dev\final_merge\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2169737247.index
 \text_chat_with_voice\src\main\java
+C:\dev\final_merge\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1719495361.index
+\waw_maeng\src\main\java
